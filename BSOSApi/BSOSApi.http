@@ -1,0 +1,6 @@
+@BSOSApi_HostAddress = http://localhost:5027
+
+GET {{BSOSApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
