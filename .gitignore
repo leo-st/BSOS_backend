@@ -1,3 +1,4 @@
 BSOSApi/obj
 BSOSApi/bin
 .vscode
+db/postgresql_data

@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  bsos-backend-local-api:
+    container_name: bsos-backend-local-api
+    build:
+      context: ./
+    ports:
+      - 5005:5005
+      - 443:443
+    networks:
+      - bsos_backend_default
+    env_file:
+      - ./.env
+    depends_on:
+      - bsos-backend-local-mssql
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:5005
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    volumes:
+      - ~/.aspnet/https:/https:ro
+  bsos-backend-local-mssql:
+    container_name: bsos-backend-local-mssql
+    build: 
+      context: ./db_ms
+    ports:
+      - "1433:1433"
+    networks:
+      - bsos_backend_default
+networks:
+  bsos_backend_default:
